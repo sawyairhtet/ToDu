@@ -1,0 +1,534 @@
+/**
+ * Animations & Transitions - Things App Inspired
+ * Smooth, subtle animations and micro-interactions
+ */
+
+/* Keyframe Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0) rotate(45deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(45deg);
+  }
+  100% {
+    transform: scale(1) rotate(45deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Animation Classes */
+.animate-slide-in-up {
+  animation: slideInUp 0.3s ease-out forwards;
+}
+
+.animate-slide-in-down {
+  animation: slideInDown 0.3s ease-out forwards;
+}
+
+.animate-slide-out-up {
+  animation: slideOutUp 0.3s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out forwards;
+}
+
+.animate-scale-out {
+  animation: scaleOut 0.2s ease-out forwards;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.5s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.animate-checkmark {
+  animation: checkmark 0.3s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Task Item Animations */
+.task-item {
+  animation: slideInUp 0.3s ease-out;
+}
+
+.task-item.removing {
+  animation: slideOutUp 0.3s ease-out forwards;
+}
+
+.task-item.adding {
+  animation: slideInDown 0.4s ease-out;
+}
+
+.task-item.completing {
+  animation: pulse 0.4s ease-out;
+}
+
+.task-item.completed .checkbox-mark:after {
+  animation: checkmark 0.3s ease-out 0.1s both;
+}
+
+/* Modal Animations */
+.modal.entering {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal.entering .modal-content {
+  animation: scaleIn 0.2s ease-out;
+}
+
+.modal.leaving {
+  animation: fadeOut 0.2s ease-out;
+}
+
+.modal.leaving .modal-content {
+  animation: scaleOut 0.2s ease-out;
+}
+
+/* Button Hover Effects */
+.btn {
+  transform: translateZ(0);
+  transition: all var(--transition-base);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+  transition-duration: 0.1s;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.btn-secondary:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-ghost:hover {
+  transform: none;
+}
+
+/* Card Hover Effects */
+.card {
+  transform: translateZ(0);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Task Item Interactions */
+.task-item {
+  transform: translateZ(0);
+  transition: all var(--transition-base);
+}
+
+.task-item:hover {
+  transform: translateY(-1px);
+}
+
+.task-item.dragging {
+  transform: rotate(2deg) scale(1.02);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-modal);
+}
+
+/* Drag and Drop States */
+.sortable-ghost {
+  opacity: 0.4;
+  background-color: var(--color-primary-light);
+  transform: scale(0.98);
+}
+
+.sortable-chosen {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.sortable-drag {
+  transform: rotate(3deg);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Focus States */
+.focus-ring {
+  transition: box-shadow var(--transition-fast);
+}
+
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/* Loading Animations */
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-secondary) 0%,
+    var(--color-border-light) 50%,
+    var(--color-surface-secondary) 100%
+  );
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Notification Animations */
+.notification {
+  animation: slideInDown 0.3s ease-out;
+}
+
+.notification.removing {
+  animation: slideOutUp 0.3s ease-out forwards;
+}
+
+/* Stats Cards Animation */
+.stats-card {
+  transition: all var(--transition-base);
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Form Input Focus Effects */
+.form-input,
+.form-select,
+.form-textarea {
+  transition: all var(--transition-base);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  transform: translateY(-1px);
+}
+
+/* Checkbox Animation */
+.checkbox-mark {
+  transition: all var(--transition-base);
+}
+
+.checkbox input:checked ~ .checkbox-mark {
+  animation: pulse 0.3s ease-out;
+}
+
+/* Badge Animations */
+.badge {
+  transition: all var(--transition-base);
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}
+
+/* Empty State Animation */
+.empty-state {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.empty-state-icon {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Search Highlight Animation */
+.search-highlight {
+  animation: pulse 1s ease-out;
+  background-color: #fef08a;
+  transition: background-color var(--transition-base);
+}
+
+/* Priority Indicator Animation */
+.priority-indicator {
+  transition: all var(--transition-base);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.task-item .priority-indicator {
+  transform: scaleY(1);
+  transition-delay: 0.1s;
+}
+
+/* Dark Mode Transition */
+* {
+  transition: background-color var(--transition-base),
+    color var(--transition-base), border-color var(--transition-base);
+}
+
+/* Stagger Animation for Multiple Items */
+.task-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.task-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.task-item:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.task-item:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.task-item:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+/* Performance Optimizations */
+.task-item,
+.card,
+.btn,
+.modal-content {
+  will-change: transform;
+}
+
+.task-item:hover,
+.card:hover,
+.btn:hover {
+  will-change: auto;
+}
+
+/* Reduce Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-float,
+  .animate-pulse {
+    animation: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .task-item,
+  .card,
+  .btn {
+    transform: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Custom Scroll Animation */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Intersection Observer Animations */
+.fade-in-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.fade-in-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Task Completion Celebration */
+@keyframes celebrate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.task-item.celebrating {
+  animation: celebrate 0.6s ease-out;
+}
+
+.task-item.celebrating .checkbox-mark {
+  animation: pulse 0.6s ease-out;
+}
+
+/* Subtle Background Patterns */
+.pattern-dots {
+  background-image: radial-gradient(
+    circle,
+    var(--color-border-light) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+  opacity: 0.5;
+}
+
+/* Loading State for Lists */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-secondary) 25%,
+    var(--color-border-light) 50%,
+    var(--color-surface-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-base);
+  height: 1em;
+  margin-bottom: var(--space-2);
+}
+
+.loading-skeleton.wide {
+  width: 100%;
+}
+
+.loading-skeleton.medium {
+  width: 75%;
+}
+
+.loading-skeleton.narrow {
+  width: 50%;
+}

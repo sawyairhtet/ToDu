@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDu - Smart Task Manager</title>
+    <meta
+      name="description"
+      content="A beautiful, modern task manager inspired by Things app"
+    />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="src/css/base.css" />
+    <link rel="stylesheet" href="src/css/components.css" />
+    <link rel="stylesheet" href="src/css/animations.css" />
+
+        <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✅</text></svg>"
+    />
+  </head>
+  <body class="h-full bg-background">
+    <!-- Application Header -->
+    <header class="app-header">
+      <div class="container">
+        <div class="flex justify-between items-center">
+          <div class="app-logo">
+            <div class="app-logo-icon">T</div>
+            <h1 class="app-title">ToDu</h1>
+          </div>
+
+          <div class="header-actions">
+            <button
+              id="statsBtn"
+              class="btn btn-ghost btn-icon"
+              title="View Statistics"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+            </button>
+
+            <button
+              id="darkModeToggle"
+              class="btn btn-ghost btn-icon"
+              title="Toggle Dark Mode"
+            >
+              <svg
+                id="sunIcon"
+                class="w-5 h-5 hidden dark:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                ></path>
+              </svg>
+              <svg
+                id="moonIcon"
+                class="w-5 h-5 block dark:hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Application Content -->
+    <main class="container py-8">
+      <!-- Task Input Card -->
+      <div class="card mb-6">
+        <form id="taskForm" class="card-body">
+          <div class="mb-4">
+            <input
+              type="text"
+              id="taskInput"
+              class="form-input form-input-lg"
+              placeholder="What needs to be done?"
+              required
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <div class="form-group">
+              <label for="dueDateInput" class="form-label">Due Date</label>
+              <input type="date" id="dueDateInput" class="form-input" />
+            </div>
+
+            <div class="form-group">
+              <label for="priorityInput" class="form-label">Priority</label>
+              <select id="priorityInput" class="form-select">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="categoryInput" class="form-label">Category</label>
+              <input
+                type="text"
+                id="categoryInput"
+                class="form-input"
+                placeholder="e.g., Work, Personal"
+                autocomplete="off"
+              />
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-primary w-full">
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  ></path>
+                </svg>
+                Add Task
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Filters Card -->
+      <div class="filter-bar">
+        <div class="filter-controls">
+          <input
+            type="text"
+            id="searchInput"
+            class="form-input"
+            placeholder="Search tasks..."
+            autocomplete="off"
+          />
+
+          <select id="statusFilter" class="form-select">
+            <option value="all">All Tasks</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+          </select>
+
+          <select id="priorityFilter" class="form-select">
+            <option value="all">All Priorities</option>
+            <option value="high">High Priority</option>
+            <option value="medium">Medium Priority</option>
+            <option value="low">Low Priority</option>
+          </select>
+
+          <select id="categoryFilter" class="form-select">
+            <option value="all">All Categories</option>
+          </select>
+
+          <select id="dueDateFilter" class="form-select">
+            <option value="all">All Dates</option>
+            <option value="overdue">Overdue</option>
+            <option value="today">Due Today</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="no-date">No Due Date</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tasks Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Tasks</h2>
+        </div>
+
+        <div id="taskList" class="divide-y divide-border-light">
+          <!-- Tasks will be dynamically rendered here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state hidden">
+          <div class="empty-state-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="empty-state-title">No tasks yet</h3>
+          <p class="empty-state-description">
+            Add your first task to get started!
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Edit Task Modal -->
+    <div id="editModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Edit Task</h3>
+          <button id="closeEditModal" class="btn btn-ghost btn-icon">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form id="editTaskForm" class="space-y-4">
+            <div class="form-group">
+              <label for="editTaskInput" class="form-label">Task</label>
+              <input
+                type="text"
+                id="editTaskInput"
+                class="form-input"
+                required
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="editDueDateInput" class="form-label">Due Date</label>
+              <input type="date" id="editDueDateInput" class="form-input" />
+            </div>
+
+            <div class="form-group">
+              <label for="editPriorityInput" class="form-label">Priority</label>
+              <select id="editPriorityInput" class="form-select">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="editCategoryInput" class="form-label">Category</label>
+              <input
+                type="text"
+                id="editCategoryInput"
+                class="form-input"
+                autocomplete="off"
+              />
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="cancelEdit" class="btn btn-secondary">
+            Cancel
+          </button>
+          <button type="submit" form="editTaskForm" class="btn btn-primary">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statistics Modal -->
+    <div id="statsModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Task Statistics</h3>
+          <button id="closeStatsModal" class="btn btn-ghost btn-icon">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div id="statsContent">
+            <!-- Statistics content will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Script -->
+    <script type="module" src="src/js/app.js"></script>
+
+    <!-- Service Worker Registration (Progressive Web App) -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((registration) => {
+              console.log("SW registered: ", registration);
+            })
+            .catch((registrationError) => {
+              console.log("SW registration failed: ", registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
